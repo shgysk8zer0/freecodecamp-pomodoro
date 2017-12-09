@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html class="no-js">
+	<head>
+		<meta charset="UTF-8" />
+		<title>FreeCodeCamp Pomodoro</title>
+		<script type="module" src="./js/index.js" async=""></script>
+		<link rel="stylesheet" href="./css/index.css" media="screen" />
+	</head>
+	<body class="background-primary font-main color-default">
+		<button data-show-modal="#settings-dialog">Settings</button>
+		<dialog class="card shadow" id="settings-dialog">
+			<header>
+				<button data-close="#settings-dialog">X</button>
+			</header>
+			<form name="settings">
+				<label for="pomodoro-length">Length</label>
+				<input type="number" name="length" id="pomodoro-length" min="5" value="25" step="5" required="" />
+				<br />
+				<label for="pomodoro-short-break">Short Break</label>
+				<input type="number" name="shortBreak" id="pomodoro-short-break" min="1" value="5" required="" />
+				<br />
+				<label for="pomodoro-long-break">Long Break</label>
+				<input type="number" name="longBreak" id="pomodoro-long-break" min="5" value="15" required="" />
+				<hr />
+				<button type="submit">Submit</button>
+			</form>
+		</dialog>
+	</body>
+</html>
