@@ -6,12 +6,24 @@ import {facebook, twitter, linkedIn, googlePlus, reddit} from './share-config.js
 import WebShareAPI from './std-js/webShareApi.js';
 import Pomodoro from './Pomodoro.js';
 
-const pomodoro = new Pomodoro();
+const pomodoro = new Pomodoro({
+	duration: 1,
+	shortBreak: 1,
+	longBreak: 1,
+});
+
+pomodoro.addEventListener('stateChange', console.log);
 
 deprefix();
 WebShareAPI(facebook, twitter, linkedIn, googlePlus, reddit);
 
 function readyHandler() {
+	pomodoro.start(() => {
+		console.log({pomodoro, remaining: pomodoro.remaining});
+		if (pomodoro.remaining === 0) {
+			new Notification(`State: ${pomodoro.state}`);
+		}
+	});
 	Mutations.init();
 	const $doc = $(document.documentElement);
 	$doc.replaceClass('no-js','js');
