@@ -1,3 +1,5 @@
+import EventHander from './EventHandler.js';
+
 function* cycleState(breaksPerPomodoro = 4) {
 	let i = 0;
 	let breaks = 0;
@@ -51,12 +53,13 @@ function calculateTime(remaining) {
 	return time;
 }
 
-export default class Pomodoro {
+export default class Pomodoro extends EventHander {
 	constructor({
 		duration   = 25,
 		shortBreak = 5,
 		longBreak  = 15,
 	} = {}) {
+		super();
 		this.work = duration * 60;
 		this.break = shortBreak * 60;
 		this.longBreak = longBreak * 60;
@@ -64,27 +67,6 @@ export default class Pomodoro {
 		this._timerID = null;
 		this.states = cycleState(1);
 		this.state = this.states.next().value;
-		this._events = {};
-	}
-
-	addEventListener(event, callback) {
-		if (! this._events.hasOwnProperty(event)) {
-			this._events[event] = new Set([callback]);
-		} else {
-			this._events[event].add(callback);
-		}
-	}
-
-	dispatchEvent(event) {
-		if (this._events.hasOwnProperty(event.type)) {
-			this._events[event.type].forEach(callback => callback(event));
-		}
-	}
-
-	removeEventListener(event, callback) {
-		if (this._events.hasOwnProperty(event)) {
-			this._events.remove(callback);
-		}
 	}
 
 	get remaining() {
