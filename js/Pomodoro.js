@@ -20,6 +20,37 @@ function* cycleState(breaksPerPomodoro = 4) {
 	}
 }
 
+function createEvent(name, pomodoro) {
+	return new CustomEvent(name, {
+		detail: {
+			state: pomodoro.state,
+			passed: pomodoro.passed,
+			remaining: pomodoro.remaining,
+			remainingString: pomodoro.toString(),
+		}
+	});
+}
+
+function calculateTime(remaining) {
+	const time = {
+		hours: 0,
+		minutes: 0,
+		seconds: 0,
+	};
+	while (remaining >= 3600) {
+		time.hours++;
+		remaining -= 3600;
+	}
+
+	while (remaining >= 60) {
+		time.minutes++;
+		remaining -= 60;
+	}
+
+	time.seconds = remaining;
+	return time;
+}
+
 export default class Pomodoro {
 	constructor({
 		duration   = 25,
@@ -33,10 +64,31 @@ export default class Pomodoro {
 		this._timerID = null;
 		this.states = cycleState(1);
 		this.state = this.states.next().value;
+		this._events = {};
+	}
+
+	addEventListener(event, callback) {
+		if (! this._events.hasOwnProperty(event)) {
+			this._events[event] = new Set([callback]);
+		} else {
+			this._events[event].add(callback);
+		}
+	}
+
+	dispatchEvent(event) {
+		if (this._events.hasOwnProperty(event.type)) {
+			this._events[event.type].forEach(callback => callback(event));
+		}
+	}
+
+	removeEventListener(event, callback) {
+		if (this._events.hasOwnProperty(event)) {
+			this._events.remove(callback);
+		}
 	}
 
 	get remaining() {
-		return this[this.state] - this.passed;
+		return calculateTime(this[this.state] - this.passed);
 	}
 
 	get paused() {
@@ -51,7 +103,18 @@ export default class Pomodoro {
 		}
 	}
 
-	tick(callback = null) {
+	toString() {
+		const remaining = this.remaining;
+		let str = '';
+		if (remaining.hours > 0) {
+			str = `${remaining.hours}:`;
+		}
+
+		str += `${remaining.minutes}:${remaining.seconds}`;
+		return str;
+	}
+
+	tick() {
 		this.passed++;
 
 		if (this.remaining <= 0) {
@@ -59,30 +122,39 @@ export default class Pomodoro {
 			this.reset();
 		}
 
-		if (callback instanceof Function) {
-			callback();
-		}
+		this.dispatchEvent(createEvent('tick', this));
 	}
 
-	start(callback = null) {
-		this._timerID = setInterval(() => this.tick(callback), 1000);
+	start() {
+		this._timerID = setInterval(() => this.tick(), 1000);
+
+		this.dispatchEvent(createEvent('start', this));
 	}
 
 	pause() {
 		clearTimeout(this._timerID);
 		this._timerID = null;
+
+		this.dispatchEvent(createEvent('pause', this));
 	}
 
 	reset() {
 		this.passed = 0;
+
+
+		this.dispatchEvent(createEvent('reset', this));
 	}
 
 	stop() {
 		this.pause();
 		this.reset();
+
+		this.dispatchEvent(createEvent('stop', this));
 	}
 
 	nextState() {
 		this.state = this.states.next().value;
+
+		this.dispatchEvent(createEvent('stateChange', this));
 	}
 }

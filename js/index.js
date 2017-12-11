@@ -7,24 +7,28 @@ import WebShareAPI from './std-js/webShareApi.js';
 import Pomodoro from './Pomodoro.js';
 
 const pomodoro = new Pomodoro({
-	duration: 1,
-	shortBreak: 1,
-	longBreak: 1,
+	// duration: 1,
+	// shortBreak: 1,
+	// longBreak: 1,
 });
-
-pomodoro.addEventListener('stateChange', console.log);
 
 deprefix();
 WebShareAPI(facebook, twitter, linkedIn, googlePlus, reddit);
 
 function readyHandler() {
-	pomodoro.start(() => {
-		console.log({pomodoro, remaining: pomodoro.remaining});
-		if (pomodoro.remaining === 0) {
-			new Notification(`State: ${pomodoro.state}`);
-		}
+	const remainingOutput = document.getElementById('remaining');
+	pomodoro.addEventListener('start', console.log);
+	pomodoro.addEventListener('stateChange', event => {
+		document.body.dataset.pomodoroState = event.detail.state;
+		new Notification(event.detail.state, {
+			body: 'What do I use for the body?',
+		});
 	});
-	Mutations.init();
+
+	pomodoro.addEventListener('tick', event => {
+		remainingOutput.textContent = event.detail.remainingString;
+	});
+	pomodoro.start();	Mutations.init();
 	const $doc = $(document.documentElement);
 	$doc.replaceClass('no-js','js');
 
