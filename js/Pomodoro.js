@@ -109,21 +109,17 @@ export default class Pomodoro extends EventHander {
 
 	start() {
 		this._timerID = setInterval(() => this.tick(), 1000);
-
 		this.dispatchEvent(createEvent('start', this));
 	}
 
 	pause() {
 		clearTimeout(this._timerID);
 		this._timerID = null;
-
 		this.dispatchEvent(createEvent('pause', this));
 	}
 
 	reset() {
 		this.passed = 0;
-
-
 		this.dispatchEvent(createEvent('reset', this));
 	}
 
@@ -136,7 +132,6 @@ export default class Pomodoro extends EventHander {
 
 	nextState() {
 		this.state = this.states.next().value;
-
 		this.dispatchEvent(createEvent('stateChange', this));
 	}
 }
