@@ -3,7 +3,6 @@ const eventHandlers = new Map();
 export default class EventHander {
 	constructor() {
 		eventHandlers.set(this, {});
-		console.log(this);
 	}
 
 	addEventListener(event, callback) {
