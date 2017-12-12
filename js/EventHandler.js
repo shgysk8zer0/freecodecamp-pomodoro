@@ -1,4 +1,4 @@
-const eventHandlers = new Map();
+const eventHandlers = new WeakMap();
 
 export default class EventHander {
 	constructor() {
