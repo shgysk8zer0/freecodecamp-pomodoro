@@ -4,7 +4,7 @@ function* cycleState(breaksPerPomodoro = 4) {
 	let i = 0;
 	let breaks = 0;
 	yield 'work';
-
+	/*eslint no-constant-condition: "off"*/
 	while(true) {
 		i++;
 
