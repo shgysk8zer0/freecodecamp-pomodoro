@@ -64,8 +64,8 @@
 		<meta property="og:image" content="{{ page.image | absolute_url }}" />
 		<meta name="twitter:image" content="{{ page.image | absolute_url }}" />
 	{% elsif site.screenshots %}
-		<meta itemprop="thumbnailUrl" content="{{ screenshot.src }}" />
 		{% for screenshot in site.screenshots %}
+			<meta itemprop="thumbnailUrl" content="{{ screenshot.src }}" />
 			<meta property="og:image" content="{{ screenshot.src | absolute_url }}" />
 			<meta name="twitter:image" content="{{ screenshot.src | absolute_url }}" />
 		{% endfor %}
@@ -135,14 +135,6 @@
 				referrerpolicy=stylesheet.referrerpolicy
 				integrity=stylesheet.integrity
 			%}
-		{% endfor %}
-	{% endif %}
-	{% if page.google_fonts %}
-		<link rel="stylesheet" media="screen" href="https://fonts.googleapis.com/css?family={{ page.google_fonts | join: '|' }}" type="text/css" crossorigin="anonymous" referrerpolicy="origin-when-cross-origin"/>
-	{% endif %}
-	{% if page.fontlibrary %}
-		{% for font in page.fontlibrary %}
-			<link rel="stylesheet" media="screen" href="https://fontlibrary.org/face/{{ font }}" type="text/css" referrerpolicy="origin-when-cross-origin"/>
 		{% endfor %}
 	{% endif %}
 	{% if  site.canonical %}<link rel="canonical" href="{{ site.canonical append: page.url }}" />{% endif %}
