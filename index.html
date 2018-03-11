@@ -40,17 +40,17 @@
 				</button>
 			</fieldset>
 			<br />
-			<button type="submit" data-action="start">
+			<button type="submit">
 				<svg class="current-color icon">
 					<use xlink:href="./img/icons.svg#play" />
 				</svg>
 			</button>
 		</form>
-		<div id="pomodoro" class="round border-width-3 border-solid flex column">
+		<div id="pomodoro" class="round border-width-3 border-solid column" hidden="">
 			<div id="pomodoro-state">Session</div>
 			<div id="remaining"></div>
 			<div class="controls" class="flex row">
-				<button type="button" data-action="pause">
+				<button type="button" data-action="pause" hidden="">
 					<svg class="current-color icon">
 						<use xlink:href="./img/icons.svg#pause" />
 					</svg>
@@ -60,7 +60,7 @@
 						<use xlink:href="./img/icons.svg#play" />
 					</svg>
 				</button>
-				<button type="button" data-action="start">
+				<button type="button" data-action="stop" hidden=="">
 					<svg class="current-color icon">
 						<use xlink:href="./img/icons.svg#stop" />
 					</svg>

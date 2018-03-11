@@ -7,16 +7,28 @@ import WebShareAPI from './std-js/webShareApi.js';
 import Pomodoro from './Pomodoro.js';
 
 const pomodoro = new Pomodoro({
-	// duration: 1,
-	// shortBreak: 1,
+	duration: 25,
+	shortBreak: 5,
 	// longBreak: 1,
 });
+window.pomodoro = pomodoro;
 
 WebShareAPI(facebook, twitter, linkedIn, googlePlus, reddit);
 
-function readyHandler() {
+ready().then(() => {
+	const $doc = $(document.documentElement);
+	const pause = $('[data-action="pause"]');
+	const start = $('[data-action="start"]');
+	const stop = $('[data-action="stop"]');
+	const reset = $('[data-action="reset"]');
 	const remainingOutput = document.getElementById('remaining');
-	pomodoro.addEventListener('start', console.log);
+
+	remainingOutput.textContent = `${pomodoro}`;
+
+	Mutations.init();
+
+	$doc.replaceClass('no-js','js');
+
 	pomodoro.addEventListener('stateChange', event => {
 		document.body.dataset.pomodoroState = event.detail.state;
 		new Notification(event.detail.state, {
@@ -24,17 +36,47 @@ function readyHandler() {
 		});
 	});
 
+	pomodoro.addEventListener('pause', () => {
+		pause.hide();
+		start.unhide();
+		stop.unhide();
+		reset.unhide();
+	});
+
+	pomodoro.addEventListener('start', () => {
+		pause.unhide();
+		start.hide();
+		stop.unhide();
+		reset.unhide();
+	});
+
+	pomodoro.addEventListener('stop', () => {
+		pause.hide();
+		start.unhide();
+		stop.hide();
+		reset.hide();
+	});
+
 	pomodoro.addEventListener('tick', event => {
 		remainingOutput.textContent = event.detail.remainingString;
 	});
-	pomodoro.start();
-	Mutations.init();
-	const $doc = $(document.documentElement);
-	$doc.replaceClass('no-js','js');
 
-	$('form').submit(event => {
+	pause.click(() => pomodoro.pause());
+	stop.click(() => pomodoro.stop());
+	start.click(() => pomodoro.start());
+	reset.click(() => pomodoro.reset());
+
+	$(document.forms).submit(event => {
 		event.preventDefault();
 		const form = new FormData(event.target);
+		const el = document.getElementById('pomodoro');
+
+		pomodoro.stop();
+		pomodoro.work = form.get('session');
+		pomodoro.break = form.get('break');
+		el.hidden = false;
+		el.classList.add('flex');
+		pomodoro.start();
 
 		[...form.entries()].forEach(entry => {
 			const [key, value] = entry;
@@ -51,6 +93,4 @@ function readyHandler() {
 		const target = event.target.closest('[data-decrement]');
 		document.querySelector(target.dataset.decrement).stepDown();
 	});
-}
-
-ready().then(readyHandler);
+});

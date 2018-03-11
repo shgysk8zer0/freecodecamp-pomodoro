@@ -37,6 +37,7 @@ function calculateTime(remaining) {
 		minutes: 0,
 		seconds: 0,
 	};
+
 	while (remaining >= 3600) {
 		time.hours++;
 		remaining -= 3600;
@@ -58,8 +59,8 @@ export default class Pomodoro extends EventTarget {
 		longBreak  = 15,
 	} = {}) {
 		super();
-		this.work = duration * 60;
-		this.break = shortBreak * 60;
+		this.work = duration;
+		this.break = shortBreak;
 		this.longBreak = longBreak * 60;
 		this.passed = 0;
 		this._timerID = null;
@@ -68,11 +69,29 @@ export default class Pomodoro extends EventTarget {
 	}
 
 	get remaining() {
-		return calculateTime(this[this.state] - this.passed);
+		if (this.state === 'work') {
+			return calculateTime(this._work - this.passed);
+		} else {
+			return calculateTime(this._break - this.passed);
+		}
 	}
 
 	get paused() {
 		return this._timerID !== null;
+	}
+
+	set break(minutes) {
+		this.stop();
+		this._break = minutes * 60;
+	}
+
+	get break() {
+		return this._break;
+	}
+
+	set work(minutes) {
+		this.stop();
+		this._work = minutes * 60;
 	}
 
 	set paused(paused) {
@@ -90,7 +109,7 @@ export default class Pomodoro extends EventTarget {
 			str = `${remaining.hours}:`;
 		}
 
-		str += `${remaining.minutes}:${remaining.seconds}`;
+		str += `${remaining.minutes}:${remaining.seconds}${remaining.seconds < 10 ? 0 : ''}`;
 		return str;
 	}
 
@@ -106,14 +125,18 @@ export default class Pomodoro extends EventTarget {
 	}
 
 	start() {
-		this._timerID = setInterval(() => this.tick(), 1000);
-		this.dispatchEvent(createEvent('start', this));
+		if (this._timerID === null) {
+			this._timerID = setInterval(() => this.tick(), 1000);
+			this.dispatchEvent(createEvent('start', this));
+		}
 	}
 
 	pause() {
-		clearTimeout(this._timerID);
-		this._timerID = null;
-		this.dispatchEvent(createEvent('pause', this));
+		if (this._timerID) {
+			clearTimeout(this._timerID);
+			this._timerID = null;
+			this.dispatchEvent(createEvent('pause', this));
+		}
 	}
 
 	reset() {
@@ -122,9 +145,11 @@ export default class Pomodoro extends EventTarget {
 	}
 
 	stop() {
-		this.pause();
+		if (this._timerID) {
+			this.pause();
+		}
 		this.reset();
-
+		this.dispatchEvent(createEvent('tick', this));
 		this.dispatchEvent(createEvent('stop', this));
 	}
 
