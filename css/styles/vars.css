@@ -1,11 +1,9 @@
 :root {
-	--primary-color: #fefefe;
-	--backdrop-background: rgba(0,0,0,0.7);
-	--button-background: linear-gradient(#E2E2E2, #C2C2C2);
-	--default-color: #1E1E1E;
+	--primary-color: #313131;
+	--button-background: none;
+	--button-border: none;
+	--default-color: #EAEAEA;
 	--main-font: Roboto;
-}
-
-::backdrop {
-	--backdrop-background: rgba(0,0,0,0.7);
+	--button-active-border: none;
+	--border-color: green;
 }

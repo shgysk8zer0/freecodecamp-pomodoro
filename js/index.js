@@ -41,6 +41,16 @@ function readyHandler() {
 			console.log({key, value});
 		});
 	});
+
+	$('[data-increment]').click(event => {
+		const target = event.target.closest('[data-increment]');
+		document.querySelector(target.dataset.increment).stepUp();
+	});
+
+	$('[data-decrement]').click(event => {
+		const target = event.target.closest('[data-decrement]');
+		document.querySelector(target.dataset.decrement).stepDown();
+	});
 }
 
 ready().then(readyHandler);

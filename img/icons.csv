@@ -10,6 +10,8 @@ top,img/adwaita-icons/actions/go-top.svg
 bottom,img/adwaita-icons/actions/go-bottom.svg
 next,img/adwaita-icons/actions/go-next.svg
 prev,img/adwaita-icons/actions/go-previous.svg
+plus,img/adwaita-icons/actions/list-add.svg
+minus,img/adwaita-icons/actions/list-remove.svg
 refresh,img/adwaita-icons/actions/view-refresh.svg
 share,img/adwaita-icons/places/folder-publicshare.svg
 close,img/adwaita-icons/actions/window-close.svg
