@@ -1,0 +1,15 @@
+<div id="pomodoro" class="round border-width-3 border-solid column animation-speed-crawl animation-ease-in-out" hidden="">
+	<div id="pomodoro-state">Session</div>
+	<div id="remaining"></div>
+	<div class="controls" class="flex row">
+		<button type="button" data-action="pause" hidden="">
+			{% include icon.html icon='pause' %}
+		</button>
+		<button type="button" data-action="start">
+			{% include icon.html icon='play' %}
+		</button>
+		<button type="button" data-action="stop" hidden=="">
+			{% include icon.html icon='stop' %}
+		</button>
+	</div>
+</div>

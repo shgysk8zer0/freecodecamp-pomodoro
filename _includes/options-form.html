@@ -1,0 +1,26 @@
+<form name="config" class="center">
+	<fieldset class="inline-block no-border">
+		<label class="block" for="break-length">Break Length</label>
+		<button type="button" data-decrement="#break-length" />
+			{% include icon.html icon='minus' %}
+		</button>
+		<input type="number" min="1" max="30" value="5" name="break" id="break-length" class="border-none background-none center color-inherit" placeholder="##" required="" />
+		<button type="button" data-increment="#break-length" />
+			{% include icon.html icon='plus' %}
+		</button>
+	</fieldset>
+	<fieldset class="inline-block no-border">
+		<label class="block" for="session-length">Session Length</label>
+		<button type="button" data-decrement="#session-length" />
+			{% include icon.html icon='minus' %}
+		</button>
+		<input type="number" min="1" max="60" value="25" name="session" id="session-length" class="border-none background-none center color-inherit" placeholder="##" size="2" required="" />
+		<button type="button" data-increment="#session-length">
+			{% include icon.html icon='plus' %}
+		</button>
+	</fieldset>
+	<br />
+	<button type="submit">
+		{% include icon.html icon='play' %}
+	</button>
+</form>
