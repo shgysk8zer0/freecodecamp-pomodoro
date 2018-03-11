@@ -111,7 +111,7 @@ export default class Pomodoro extends EventHander {
 			str = `${remaining.hours}:`;
 		}
 
-		str += `${remaining.minutes}:${remaining.seconds}${remaining.seconds < 10 ? 0 : ''}`;
+		str += `${remaining.minutes}:${remaining.seconds < 10 ? 0 : ''}${remaining.seconds}`;
 		return str;
 	}
 
