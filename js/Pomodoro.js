@@ -1,3 +1,5 @@
+import EventHander from './EventHandler.js';
+
 function* cycleState(breaksPerPomodoro = 4) {
 	let i = 0;
 	let breaks = 0;
@@ -52,7 +54,7 @@ function calculateTime(remaining) {
 	return time;
 }
 
-export default class Pomodoro extends EventTarget {
+export default class Pomodoro extends EventHander {
 	constructor({
 		duration   = 25,
 		shortBreak = 5,
