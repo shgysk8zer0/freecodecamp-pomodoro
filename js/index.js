@@ -9,7 +9,7 @@ import Pomodoro from './Pomodoro.js';
 
 WebShareAPI(facebook, twitter, linkedIn, googlePlus, reddit);
 
-ready().then(() => {
+ready().then(async () => {
 	const $doc = $(document.documentElement);
 	const pause = $('[data-action="pause"]');
 	const start = $('[data-action="start"]');
@@ -17,7 +17,7 @@ ready().then(() => {
 	const reset = $('[data-action="reset"]');
 	const pomodoroState = document.getElementById('pomodoro-state');
 	const remainingOutput = document.getElementById('remaining');
-	const icon = new URL('img/pomodoro.svg', document.baseURI);
+	const icon = await $('link[rel="icon"]').find(icon => icon.sizes.contains('32x32'));
 	const messages = {
 		work: 'Focus on your task',
 		break: 'Take a break',
@@ -33,7 +33,7 @@ ready().then(() => {
 	pomodoro.addEventListener('work', () => {
 		notify(document.title, {
 			body: messages.work,
-			icon: icon,
+			icon: icon.href,
 		});
 		pomodoroState.textContent = 'Work';
 	});
@@ -41,7 +41,7 @@ ready().then(() => {
 	pomodoro.addEventListener('break', () => {
 		notify(document.title, {
 			body: messages.break,
-			icon: icon,
+			icon: icon.href,
 		});
 		pomodoroState.textContent = 'Break';
 	});
