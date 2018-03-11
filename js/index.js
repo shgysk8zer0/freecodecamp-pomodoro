@@ -1,6 +1,6 @@
 import './std-js/shims.js';
 import deprefix from './std-js/deprefixer.js';
-import {$} from './std-js/functions.js';
+import {$, ready} from './std-js/functions.js';
 import * as Mutations from './std-js/mutations.js';
 import {facebook, twitter, linkedIn, googlePlus, reddit} from './share-config.js';
 import WebShareAPI from './std-js/webShareApi.js';
@@ -43,4 +43,4 @@ function readyHandler() {
 	});
 }
 
-$(self).ready(readyHandler, {once: true});
+ready.then(readyHandler);
