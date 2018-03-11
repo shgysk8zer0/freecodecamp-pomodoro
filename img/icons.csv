@@ -18,6 +18,7 @@ link,img/octicons/lib/svg/link.svg
 link-external,img/octicons/lib/svg/link-external.svg
 mail-unread,img/adwaita-icons/status/mail-unread.svg
 menu,img/adwaita-icons/actions/open-menu.svg
+preferences,img/adwaita-icons/categories/preferences-system.svg
 view-more,img/adwaita-icons/actions/view-more.svg
 pause,img/adwaita-icons/actions/media-playback-pause.svg
 play,img/adwaita-icons/actions/media-playback-start.svg

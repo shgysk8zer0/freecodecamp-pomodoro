@@ -27,7 +27,8 @@ function readyHandler() {
 	pomodoro.addEventListener('tick', event => {
 		remainingOutput.textContent = event.detail.remainingString;
 	});
-	pomodoro.start();	Mutations.init();
+	pomodoro.start();
+	Mutations.init();
 	const $doc = $(document.documentElement);
 	$doc.replaceClass('no-js','js');
 
@@ -42,4 +43,4 @@ function readyHandler() {
 	});
 }
 
-ready.then(readyHandler);
+ready().then(readyHandler);

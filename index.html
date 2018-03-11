@@ -8,10 +8,18 @@
 	</head>
 	<body class="background-primary font-main color-default">
 		<time id="remaining">0</time>
-		<button data-show-modal="#settings-dialog">Settings</button>
+		<button data-show-modal="#settings-dialog">
+			<svg class="icon current-color">
+				<use xlink:href="./img/icons.svg#preferences" />
+			</svg>
+		</button>
 		<dialog class="card shadow" id="settings-dialog">
 			<header>
-				<button data-close="#settings-dialog">X</button>
+				<button data-close="#settings-dialog">
+					<svg class="icon current-color">
+						<use xlink:href="./img/icons.svg#close" />
+					</svg>
+				</button>
 			</header>
 			<form name="settings">
 				<label for="pomodoro-length">Length</label>
