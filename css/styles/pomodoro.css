@@ -4,7 +4,7 @@
 	height: var(--pomodoro-size);
 	align-items: center;
 	justify-content: center;
-	transform: translate(calc(50vw - var(--pomodoro-size) / 2), 10vh);
+	margin: 5vmin;
 }
 
 input[type="number"] {

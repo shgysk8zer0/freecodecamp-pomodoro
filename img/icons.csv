@@ -16,6 +16,8 @@ refresh,img/adwaita-icons/actions/view-refresh.svg
 share,img/adwaita-icons/places/folder-publicshare.svg
 close,img/adwaita-icons/actions/window-close.svg
 avatar-default,img/adwaita-icons/status/avatar-default.svg
+call-start,img/adwaita-icons/actions/call-start.svg
+web-browser,img/adwaita-icons/apps/web-browser.svg
 link,img/octicons/lib/svg/link.svg
 link-external,img/octicons/lib/svg/link-external.svg
 mail-unread,img/adwaita-icons/status/mail-unread.svg

@@ -3,49 +3,15 @@
 {% assign author = site.data.authors[name] %}
 <footer id="contact" class="color-alt no-text-decoration optimize-speed" role="contentinfo">
 	<div itemprop="author" itemtype="http://schema.org/Person" itemscope="">
-		<h2 class="author-basics center clearfix">
+		<h2 class="author-basics center clearfix" hidden>
 			{% include gravatar.html gravatar=author.image.gravatar sizes='4vw' itemprop='image' default_size='76' class='round shadow float-left' %}
-			<div itemprop="name" class="inline-block font-title float-left">
+			<div itemprop="name" class="inline-block float-left">
 				<span itemprop="givenName">{{ author.givenName }}</span>
 				<span itemprop="additionalName">{{ author.additionalName }}</span>
 				<span itemprop="familyName">{{ author.familyName }}</span>
 			</div>
 		</h2>
 		<div class="flex row wrap">
-			<ul>
-				<li>
-					<a href="{{ '/about/' | absolute_url }}" class="color-inherit">
-						{% include icon.html icon='avatar-default' class=footer-icon-class %}
-						About
-					</a>
-				</li>
-				<li>
-					<a href="{{ '/contact/' | absolute_url }}" class="color-inherit">
-						{% include icon.html icon='address-book' class=footer-icon-class %}
-						Contact
-					</a>
-				</li>
-				<li>
-					<a href="{{ '/resume/' | absolute_url }}" title="My Résumé" class="inline-block color-inherit">
-						{% include icon.html icon='pdf' class=footer-icon-class %}
-						Resume
-					</a>
-				</li>
-				<li>
-					<a href="{{ '/portfolio/' | absolute_url }}" title="Portfolio" class="inline-block color-inherit">
-						{% include icon.html icon='engineering' class=footer-icon-class %}
-						Portfolio
-					</a>
-				</li>
-				{% if site.feed %}
-					<li>
-						<a href="{{ site.feed.url | absolute_url}}" title="Subscribe to feed" target="_blank" class="inline-block color-inherit">
-							{% include icon.html icon="rss" class=footer-icon-class %}
-							RSS Feed
-						</a>
-					</li>
-				{% endif %}
-			</ul>
 			<ul>
 				{% if author.url %}
 					<li>
@@ -95,14 +61,6 @@
 						</a>
 					</li>
 				{% endif %}
-				{% if author.sameAs.youtube %}
-					<li>
-						<a href="https://youtube.com/user/{{ author.sameAs.youtube }}" class="{{ link-class }}" title="YouTube" target="_blank" rel="noopener external" itemprop="sameAs">
-							{% include icon.html icon='youtube' class=footer-icon-class %}
-							YouTube
-						</a>
-					</li>
-				{% endif %}
 				{% if author.sameAs.codepen %}
 					<li>
 						<a href="https://codepen.io/{{ author.sameAs.codepen }}" class="{{ link-class }}" title="CodePen" target="_blank" rel="noopener external" itemprop="sameAs">
@@ -116,14 +74,6 @@
 						<a href="https://stackoverflow.com/users/{{ author.sameAs.stackoverflow }}" class="{{ link-class }}" title="StackOverflow" target="_blank" rel="noopener external" itemprop="sameAs">
 							{% include icon.html icon='stackoverflow' class=footer-icon-class %}
 							StackOverflow
-						</a>
-					</li>
-				{% endif %}
-				{% if author.sameAs.upwork %}
-					<li>
-						<a href="https://www.upwork.com/o/profiles/users/{{ author.sameAs.upwork }}" class="{{ link-class }}" title="Upwork" target="_blank" rel="noopener external" itemprop="sameAs">
-							{% include icon.html icon='upwork' class=footer-icon-class %}
-							Upwork
 						</a>
 					</li>
 				{% endif %}

@@ -9,5 +9,15 @@
 @import url("../animate.css/animate.css");
 @import url("./pomodoro.css");
 @import url("./icons.css");
-@import url("https://fontlibrary.org/face/process");
-@import url('https://fonts.googleapis.com/css?family=Cabin');
+@import url("./footer.css");
+
+body {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	align-items: center;
+}
+
+body > footer {
+	width: 100vw;
+}

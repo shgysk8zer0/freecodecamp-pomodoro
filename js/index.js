@@ -1,6 +1,7 @@
 import './std-js/shims.js';
 import './std-js/deprefixer.js';
 import {$, ready} from './std-js/functions.js';
+import {confirm} from './std-js/asyncDialog.js';
 import * as Mutations from './std-js/mutations.js';
 import {facebook, twitter, linkedIn, googlePlus, reddit} from './std-js/share-config.js';
 import WebShareAPI from './std-js/webShareApi.js';
@@ -66,16 +67,18 @@ ready().then(() => {
 
 	$(document.forms).submit(async event => {
 		event.preventDefault();
-		const form = new FormData(event.target);
-		const $el = $('#pomodoro');
 
-		pomodoro.stop();
-		pomodoro.work = form.get('session');
-		pomodoro.break = form.get('break');
-		$el.unhide();
-		$el.addClass('flex');
-		$el.fadeIn();
-		pomodoro.start();
+		if (! pomodoro.paused || await confirm('Are you sure you want to reset?')) {
+			const form = new FormData(event.target);
+			const $el = $('#pomodoro');
+
+			pomodoro.stop();
+			pomodoro.work = form.get('session');
+			pomodoro.break = form.get('break');
+			$el.removeClass('hidden');
+			$el.addClass('flex', 'bounceInUp');
+			pomodoro.start();
+		}
 	});
 
 	$('[data-increment]').click(event => {

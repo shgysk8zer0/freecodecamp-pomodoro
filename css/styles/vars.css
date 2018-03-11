@@ -1,12 +1,14 @@
 :root {
 	--primary-color: #313131;
 	--accent-color: #16AC16;
-	--button-background: none;
-	--button-border: none;
 	--default-color: #EAEAEA;
-	--main-font: Roboto;
+
+	--button-background: none;
 	--button-active-border: none;
+	--button-border: none;
 	--button-color: inherit;
+
+	--main-font: Roboto;
 	--title-font: DancingScriptRegular;
 	--pomodoro-size: 35vmin;
 	--pomodoro-border: 5px solid var(--accent-color);
