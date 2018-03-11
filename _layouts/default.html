@@ -1,5 +1,13 @@
 <!DOCTYPE html>
-<html class="no-js smooth-scroll" itemtype="http://schema.org/WebPage" itemscope="">
+<html
+	lang="{{ site.lang | default: 'en' }}"
+	dir="{{ site.dir | default: 'ltr' }}"
+	class="no-js scroll-smooth"
+	itemtype="{{ page.itemtype | default: 'http://schema.org/WebPage' }}"
+	itemscope=""
+	{% if site.google-analytics %}data-google-analytics="{{ site.google-analytics }}"{% endif %}
+>
+
 	{% include head.html %}
 	<body class="background-primary font-main color-default center">
 		{{ content }}
