@@ -1,16 +1,11 @@
 import './std-js/shims.js';
 import './std-js/deprefixer.js';
-import {$, ready} from './std-js/functions.js';
+import {$, ready, notify} from './std-js/functions.js';
 import {confirm} from './std-js/asyncDialog.js';
 import * as Mutations from './std-js/mutations.js';
 import {facebook, twitter, linkedIn, googlePlus, reddit} from './std-js/share-config.js';
 import WebShareAPI from './std-js/webShareApi.js';
 import Pomodoro from './Pomodoro.js';
-
-const pomodoro = new Pomodoro({
-	duration: 25,
-	shortBreak: 5,
-});
 
 WebShareAPI(facebook, twitter, linkedIn, googlePlus, reddit);
 
@@ -20,7 +15,14 @@ ready().then(() => {
 	const start = $('[data-action="start"]');
 	const stop = $('[data-action="stop"]');
 	const reset = $('[data-action="reset"]');
+	const pomodoroState = document.getElementById('pomodoro-state');
 	const remainingOutput = document.getElementById('remaining');
+	const icon = new URL('img/pomodoro.svg', document.baseURI);
+	const messages = {
+		work: 'Focus on your task',
+		break: 'Take a break',
+	};
+	const pomodoro = new Pomodoro();
 
 	remainingOutput.textContent = `${pomodoro}`;
 
@@ -28,11 +30,20 @@ ready().then(() => {
 
 	$doc.replaceClass('no-js','js');
 
-	pomodoro.addEventListener('stateChange', event => {
-		document.body.dataset.pomodoroState = event.detail.state;
-		new Notification(event.detail.state, {
-			body: 'What do I use for the body?',
+	pomodoro.addEventListener('work', () => {
+		notify(document.title, {
+			body: messages.work,
+			icon: icon,
 		});
+		pomodoroState.textContent = 'Work';
+	});
+
+	pomodoro.addEventListener('break', () => {
+		notify(document.title, {
+			body: messages.break,
+			icon: icon,
+		});
+		pomodoroState.textContent = 'Break';
 	});
 
 	pomodoro.addEventListener('pause', () => {

@@ -1,23 +1,15 @@
 import EventHander from './EventHandler.js';
 
-function* cycleState(breaksPerPomodoro = 4) {
-	let i = 0;
-	let breaks = 0;
-	yield 'work';
+const states = [
+	'work',
+	'break',
+];
+
+function* cycleState() {
 	/*eslint no-constant-condition: "off"*/
 	while(true) {
-		i++;
-
-		if (i % 2 === 0) {
-			yield 'work';
-		} else {
-			breaks++;
-
-			if (breaks % breaksPerPomodoro === 0) {
-				yield 'longBreak';
-			} else {
-				yield 'break';
-			}
+		for (const state of states) {
+			yield state;
 		}
 	}
 }
@@ -56,18 +48,16 @@ function calculateTime(remaining) {
 
 export default class Pomodoro extends EventHander {
 	constructor({
-		duration   = 25,
-		shortBreak = 5,
-		longBreak  = 15,
+		workLength  = 25,
+		breakLength = 5,
 	} = {}) {
 		super();
-		this.work = duration;
-		this.break = shortBreak;
-		this.longBreak = longBreak * 60;
+		this.work = workLength;
+		this.break = breakLength;
 		this.passed = 0;
 		this._timerID = null;
 		this.states = cycleState(1);
-		this.state = this.states.next().value;
+		this.state = null;
 	}
 
 	get remaining() {
@@ -130,6 +120,9 @@ export default class Pomodoro extends EventHander {
 		if (this._timerID === null) {
 			this._timerID = setInterval(() => this.tick(), 1000);
 			this.dispatchEvent(createEvent('start', this));
+			if (this.state === null) {
+				this.nextState();
+			}
 		}
 	}
 
@@ -157,6 +150,7 @@ export default class Pomodoro extends EventHander {
 
 	nextState() {
 		this.state = this.states.next().value;
+		this.dispatchEvent(createEvent(this.state, this));
 		this.dispatchEvent(createEvent('stateChange', this));
 	}
 }
