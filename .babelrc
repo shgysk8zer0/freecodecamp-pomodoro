@@ -1,12 +1,8 @@
 {
-	"presets": [
-		"es2015",
-		"stage-3"
-	],
-	"sourceMaps": true,
-	"compact": true,
-	"comments": false,
-	"plugins": [
-		"transform-runtime"
-	]
+  "plugins": [
+    ["transform-runtime", {
+      "polyfill": false,
+      "regenerator": true
+    }]
+  ]
 }
