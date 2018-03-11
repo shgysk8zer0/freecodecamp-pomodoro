@@ -66,16 +66,16 @@ ready().then(() => {
 	start.click(() => pomodoro.start());
 	reset.click(() => pomodoro.reset());
 
-	$(document.forms).submit(event => {
+	$(document.forms).submit(async event => {
 		event.preventDefault();
 		const form = new FormData(event.target);
-		const el = document.getElementById('pomodoro');
+		const el = $('#pomodoro');
 
 		pomodoro.stop();
 		pomodoro.work = form.get('session');
 		pomodoro.break = form.get('break');
-		el.hidden = false;
-		el.classList.add('flex');
+		el.unhide();
+		el.addClass('bounceInUp', 'flex');
 		pomodoro.start();
 
 		[...form.entries()].forEach(entry => {

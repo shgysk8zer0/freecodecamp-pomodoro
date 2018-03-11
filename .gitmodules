@@ -16,3 +16,6 @@
 [submodule "img/octicons"]
 	path = img/octicons
 	url = https://github.com/primer/octicons.git
+[submodule "css/animate.css"]
+	path = css/animate.css
+	url = https://github.com/daneden/animate.css.git

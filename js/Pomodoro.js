@@ -116,7 +116,7 @@ export default class Pomodoro extends EventTarget {
 	tick() {
 		this.passed++;
 
-		if (this.remaining <= 0) {
+		if ((this.state === 'work' && this.passed >= this._work) || (this.passed >= this._break)) {
 			this.nextState();
 			this.reset();
 		}
