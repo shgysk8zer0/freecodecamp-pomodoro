@@ -2,14 +2,14 @@
 	<div id="pomodoro-state">Session</div>
 	<div id="remaining"></div>
 	<div class="controls" class="flex row">
-		<button type="button" data-action="pause" hidden="">
+		<button type="button" data-action="pause" title="Pause" hidden="">
 			{% include icon.html icon='pause' %}
 		</button>
-		<button type="button" data-action="start">
+		<button type="button" data-action="start" title="Start">
 			{% include icon.html icon='play' %}
 		</button>
-		<button type="button" data-action="stop" hidden=="">
-			{% include icon.html icon='stop' %}
+		<button type="button" data-action="stop" title="Reset" hidden=="">
+			{% include icon.html icon='refresh' %}
 		</button>
 	</div>
 </div>

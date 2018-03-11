@@ -1,9 +1,10 @@
 #pomodoro {
-	border-color: var(--border-color);
-	width: 25vmin;
-	height: 25vmin;
+	border: var(--pomodoro-border);
+	width: var(--pomodoro-size);
+	height: var(--pomodoro-size);
 	align-items: center;
 	justify-content: center;
+	transform: translate(calc(50vw - var(--pomodoro-size) / 2), 10vh);
 }
 
 input[type="number"] {
@@ -19,6 +20,6 @@ input[type=number]::-webkit-outer-spin-button {
 	margin: 0;
 }
 
-[data-action] {
+[data-action], [type="submit"] {
 	font-size: 1.5em;
 }

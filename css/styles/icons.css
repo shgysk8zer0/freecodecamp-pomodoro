@@ -3,7 +3,7 @@
 }
 
 [data-share], [data-share]:active {
-	background: #10A4B9;
+	background-color: var(--accent-color);
 	bottom: 0.5rem;
 	right: 0.2rem;
 	width: 2.7rem;

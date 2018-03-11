@@ -67,13 +67,14 @@ ready().then(() => {
 	$(document.forms).submit(async event => {
 		event.preventDefault();
 		const form = new FormData(event.target);
-		const el = $('#pomodoro');
+		const $el = $('#pomodoro');
 
 		pomodoro.stop();
 		pomodoro.work = form.get('session');
 		pomodoro.break = form.get('break');
-		el.unhide();
-		el.addClass('bounceInUp', 'flex');
+		$el.unhide();
+		$el.addClass('flex');
+		$el.fadeIn();
 		pomodoro.start();
 	});
 
