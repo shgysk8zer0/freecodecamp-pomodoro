@@ -3,10 +3,7 @@
 /node_modules/
 /_site/
 /npm-debug.log
-/img/icons.svg
 /_site/
-*.min*
-*.map
 
 #################
 ## Eclipse

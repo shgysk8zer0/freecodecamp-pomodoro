@@ -2,16 +2,14 @@ import './std-js/shims.js';
 import './std-js/deprefixer.js';
 import {$, ready} from './std-js/functions.js';
 import * as Mutations from './std-js/mutations.js';
-import {facebook, twitter, linkedIn, googlePlus, reddit} from './share-config.js';
+import {facebook, twitter, linkedIn, googlePlus, reddit} from './std-js/share-config.js';
 import WebShareAPI from './std-js/webShareApi.js';
 import Pomodoro from './Pomodoro.js';
 
 const pomodoro = new Pomodoro({
 	duration: 25,
 	shortBreak: 5,
-	// longBreak: 1,
 });
-window.pomodoro = pomodoro;
 
 WebShareAPI(facebook, twitter, linkedIn, googlePlus, reddit);
 
@@ -77,11 +75,6 @@ ready().then(() => {
 		el.unhide();
 		el.addClass('bounceInUp', 'flex');
 		pomodoro.start();
-
-		[...form.entries()].forEach(entry => {
-			const [key, value] = entry;
-			console.log({key, value});
-		});
 	});
 
 	$('[data-increment]').click(event => {

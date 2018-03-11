@@ -1,71 +1,63 @@
-<!DOCTYPE html>
-<html class="no-js smooth-scroll">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width,initial-scale=1" />
-		<title>FreeCodeCamp Pomodoro</title>
-		<script type="module" src="./js/index.js" async=""></script>
-		<link rel="stylesheet" href="./css/styles/index.css" media="screen" />
-		<link rel="icon" type="image/svg+xml" href="./img/pomodoro.svg" />
-	</head>
-	<body class="background-primary font-main color-default center">
-		<h1 class="center">FreeCodeCamp</h1>
-		<form name="config" class="center">
-			<fieldset class="inline-block no-border">
-				<label class="block" for="break-length">Break Length</label>
-				<button type="button" data-decrement="#break-length" />
-					<svg class="current-color icon">
-						<use xlink:href="./img/icons.svg#minus" />
-					</svg>
-				</button>
-				<input type="number" min="1" max="30" value="5" name="break" id="break-length" class="border-none background-none center color-inherit" placeholder="##" required="" />
-				<button type="button" data-increment="#break-length" />
-					<svg class="current-color icon">
-						<use xlink:href="./img/icons.svg#plus" />
-					</svg>
-				</button>
-			</fieldset>
-			<fieldset class="inline-block no-border">
-				<label class="block" for="session-length">Session Length</label>
-				<button type="button" data-decrement="#session-length" />
-					<svg class="current-color icon">
-						<use xlink:href="./img/icons.svg#minus" />
-					</svg>
-				</button>
-				<input type="number" min="1" max="60" value="25" name="session" id="session-length" class="border-none background-none center color-inherit" placeholder="##" size="2" required="" />
-				<button type="button" data-increment="#session-length">
-					<svg class="current-color icon">
-						<use xlink:href="./img/icons.svg#plus" />
-					</svg>
-				</button>
-			</fieldset>
-			<br />
-			<button type="submit">
-				<svg class="current-color icon">
-					<use xlink:href="./img/icons.svg#play" />
-				</svg>
-			</button>
-		</form>
-		<div id="pomodoro" class="round border-width-3 border-solid column animation-speed-crawl animation-ease-in-out" hidden="">
-			<div id="pomodoro-state">Session</div>
-			<div id="remaining"></div>
-			<div class="controls" class="flex row">
-				<button type="button" data-action="pause" hidden="">
-					<svg class="current-color icon">
-						<use xlink:href="./img/icons.svg#pause" />
-					</svg>
-				</button>
-				<button type="button" data-action="start">
-					<svg class="current-color icon">
-						<use xlink:href="./img/icons.svg#play" />
-					</svg>
-				</button>
-				<button type="button" data-action="stop" hidden=="">
-					<svg class="current-color icon">
-						<use xlink:href="./img/icons.svg#stop" />
-					</svg>
-				</button>
-			</div>
-		</div>
-	</body>
-</html>
+---
+layout: default
+title: FreeCodeCamp Pomodoro
+---
+<h1 class="center">FreeCodeCamp</h1>
+<form name="config" class="center">
+	<fieldset class="inline-block no-border">
+		<label class="block" for="break-length">Break Length</label>
+		<button type="button" data-decrement="#break-length" />
+			<svg class="current-color icon">
+				<use xlink:href="./img/icons.svg#minus" />
+			</svg>
+		</button>
+		<input type="number" min="1" max="30" value="5" name="break" id="break-length" class="border-none background-none center color-inherit" placeholder="##" required="" />
+		<button type="button" data-increment="#break-length" />
+			<svg class="current-color icon">
+				<use xlink:href="./img/icons.svg#plus" />
+			</svg>
+		</button>
+	</fieldset>
+	<fieldset class="inline-block no-border">
+		<label class="block" for="session-length">Session Length</label>
+		<button type="button" data-decrement="#session-length" />
+			<svg class="current-color icon">
+				<use xlink:href="./img/icons.svg#minus" />
+			</svg>
+		</button>
+		<input type="number" min="1" max="60" value="25" name="session" id="session-length" class="border-none background-none center color-inherit" placeholder="##" size="2" required="" />
+		<button type="button" data-increment="#session-length">
+			<svg class="current-color icon">
+				<use xlink:href="./img/icons.svg#plus" />
+			</svg>
+		</button>
+	</fieldset>
+	<br />
+	<button type="submit">
+		<svg class="current-color icon">
+			<use xlink:href="./img/icons.svg#play" />
+		</svg>
+	</button>
+</form>
+<div id="pomodoro" class="round border-width-3 border-solid column animation-speed-crawl animation-ease-in-out" hidden="">
+	<div id="pomodoro-state">Session</div>
+	<div id="remaining"></div>
+	<div class="controls" class="flex row">
+		<button type="button" data-action="pause" hidden="">
+			<svg class="current-color icon">
+				<use xlink:href="./img/icons.svg#pause" />
+			</svg>
+		</button>
+		<button type="button" data-action="start">
+			<svg class="current-color icon">
+				<use xlink:href="./img/icons.svg#play" />
+			</svg>
+		</button>
+		<button type="button" data-action="stop" hidden=="">
+			<svg class="current-color icon">
+				<use xlink:href="./img/icons.svg#stop" />
+			</svg>
+		</button>
+	</div>
+</div>
+{% include share-button.html %}
