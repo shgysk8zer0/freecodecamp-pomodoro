@@ -137,6 +137,14 @@
 			%}
 		{% endfor %}
 	{% endif %}
+	{% if page.google_fonts %}
+		<link rel="stylesheet" media="screen" href="https://fonts.googleapis.com/css?family={{ page.google_fonts | join: '|' }}" type="text/css" crossorigin="anonymous" referrerpolicy="origin-when-cross-origin"/>
+	{% endif %}
+	{% if page.fontlibrary %}
+		{% for font in page.fontlibrary %}
+			<link rel="stylesheet" media="screen" href="https://fontlibrary.org/face/{{ font }}" type="text/css" crossorigin="anonymous" referrerpolicy="origin-when-cross-origin"/>
+		{% endfor %}
+	{% endif %}
 	{% if  site.canonical %}<link rel="canonical" href="{{ site.canonical append: page.url }}" />{% endif %}
 	{% if site.data.icons.icons %}{% for icon in site.data.icons.icons %}
 		<link rel="icon" href="{{ icon.href | absolute_url }}" type="{{ icon.type }}" sizes="{{ icon.sizes }}" />
