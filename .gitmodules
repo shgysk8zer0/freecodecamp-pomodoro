@@ -12,7 +12,7 @@
 	url = https://github.com/shgysk8zer0/adwaita-icons.git
 [submodule "img/logos"]
 	path = img/logos
-	url = http://github.com/shgysk8zer0/logos.git
+	url = https://github.com/shgysk8zer0/logos.git
 [submodule "img/octicons"]
 	path = img/octicons
 	url = https://github.com/primer/octicons.git
