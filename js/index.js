@@ -1,5 +1,5 @@
 import './std-js/shims.js';
-import deprefix from './std-js/deprefixer.js';
+import './std-js/deprefixer.js';
 import {$, ready} from './std-js/functions.js';
 import * as Mutations from './std-js/mutations.js';
 import {facebook, twitter, linkedIn, googlePlus, reddit} from './share-config.js';
@@ -12,7 +12,6 @@ const pomodoro = new Pomodoro({
 	// longBreak: 1,
 });
 
-deprefix();
 WebShareAPI(facebook, twitter, linkedIn, googlePlus, reddit);
 
 function readyHandler() {
